@@ -1,0 +1,25 @@
+base-img-name = '../images/background'
+for celNum in (1..11)
+  .cel{celNum}
+    padding 30px
+    height (100/3)vh
+    border solid white
+    transition 0.2s linear
+    word-wrap break-word
+
+    //sdsddfsds
+    ^[0]:hover
+      transform scale(1.04)
+      z-index 100
+      box-shadow 0px 0px 22px 0px #222222
+
+for celNum in 1 2 4 5 7 8 9 11
+  .cel{celNum}
+    imgName = base-img-name + celNum + '.jpg'
+    background url(imgName) no-repeat
+    background-size cover
+
+for celNum in 3 6 10
+  .cel{celNum}
+      background-color #7c05f2
+      padding-top 52px

@@ -1,0 +1,26 @@
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Title</th>
+                <th>Theme</th>
+                <th>Date</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let post of posts" >
+                <td>{{post._id}}</td>
+                <td>{{post.title}}</td>
+                <td>{{post.theme}}</td>
+                <td>{{post.postDate | toDate | date:'medium'}}</td>
+                <td><a class="btn btn-default" (click)="editPost(post._id)">Edit</a></td>
+                <td><a class="btn btn-danger" (click)="deletePost(post._id)">Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <hr/>
+    <a [routerLink]="['AddPostForm']" class="btn btn-default">Add Post</a>
+</div>

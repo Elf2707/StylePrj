@@ -1,0 +1,84 @@
+<div *ngIf="!posts">
+    <h1>Loading...</h1>
+</div>
+<section *ngIf="posts">
+    <div class="row">
+        <a [routerLink]="['Contacts']">
+            <div class="cel1 col-md-2 col-sm-4">
+                <p class="md-pink-text">Contact me</p>
+            </div>
+        </a>
+        <a [routerLink]="['PostView', {id: 2}]">
+            <div class="cel2 col-md-4 col-sm-8">
+                <p class="my-services-text md-lime-text">Мои услуги</p>
+            </div>
+        </a>
+
+        <div class="clearfix visible-sm-block"></div>
+        <a [routerLink]="['AddPostForm']">
+            <div class="cel3 col-md-3 col-sm-6">
+                <p class="rotate-text bg-lpink-text">Login</p>
+                <a href=""><p class="md-pink-text">Register</p></a>
+                <a href=""><p class="md-pink-text">Profile</p></a>
+                <a [routerLink]="['AdminPosts']" class="btn btn-default">Admin Panel</a>
+            </div>
+        </a>
+        <a href="">
+            <div class="cel4 col-md-3 col-sm-6">
+                <p class="md-pink-text text-bottom">Примеры моих работ</p>
+            </div>
+        </a>
+    </div>
+    <div class="row">
+        <a [routerLink]="['PostView', {id: posts[0]._id}]">
+            <div class="cel5 col-md-5 col-sm-12">
+                <p class="md-lime-text">{{posts[0].title}}</p>
+                <p class="sm-lime-text "><small>{{posts[0].subTitle}}</small></p>
+            </div>
+        </a>
+
+        <div class="clearfix visible-sm-block"></div>
+        <a [routerLink]="['About']">
+            <div class="cel6 col-md-3 col-sm-4">
+                <p class="rotate-text bg-lpink-text text-center">About</p>
+                <p class="rotate-text bg-lpink-text text-center">me</p>
+            </div>
+        </a>
+        <a [routerLink]="['PostView', {id: posts[1]._id}]">
+            <div class="cel7 col-md-4 col-sm-8">
+                <p class="md-lime-text">{{posts[1].title}}</p>
+                <p class="sm-lime-text">{{posts[1].subTitle}}</p>
+            </div>
+        </a>
+    </div>
+    <div class="row">
+        <a [routerLink]="['PostView', {id: posts[2]._id}]">
+            <div class="cel8 col-md-3 col-sm-5">
+                <p class="md-pink-text">{{posts[2].title}}</p>
+                <p class="sm-pink-text">{{posts[2].subTitle}}</p>
+            </div>
+        </a>
+
+        <a [routerLink]="['PostView', {id: posts[3]._id}]">
+            <div class="cel9 col-md-4 col-sm-7">
+                <p class="md-lime-text">{{posts[3].title}}</p>
+                <p class="sm-lime-text"><small>{{posts[3].subTitle}}</small></p>
+            </div>
+        </a>
+
+        <div class="clearfix visible-sm-block"></div>
+        <a [routerLink]="['AllPosts']">
+            <div class="cel10 col-md-3 col-sm-6">
+                <p class="rotate-text bg-lpink-text text-center">All</p>
+                <p class="rotate-text bg-lpink-text text-center">Posts</p>
+            </div>
+        </a>
+
+        <a [routerLink]="['PostView', {id: posts[4]._id}]">
+            <div class="cel11 col-md-2 col-sm-6">
+                <p class="md-pink-text">{{posts[4].title}}</p>
+                <p class="sm-pink-text"><small>{{posts[4].subTitle}}</small></p>
+            </div>
+        </a>
+    </div>
+</section>

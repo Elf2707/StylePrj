@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="media" *ngFor="let post of posts">
+        <div class="media-left media-top">
+            <img class="media-object" src="public/images/background1.jpg" width="100px" heigth="100px" alt="image">
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">{{post?.title}}</h4>
+            <h4 class="media-heading"><small>{{post?.subTitle}}</small></h4>
+            <h4>Post date: {{post?.postDate | toDate | date:'medium'}}</h4>
+            <p>{{post?.body | shortCut:60 }}</p>
+            <a [routerLink]="['PostView', {id: post._id}]" class="btn btn-primary">Read Post</a>
+            <hr/>
+        </div>
+    </div>
+</div>

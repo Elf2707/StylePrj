@@ -1,0 +1,70 @@
+a {
+    text-decoration: none;
+}
+
+p {
+    line-height: 0.9em;
+    margin-left: 15px;
+}
+
+@keyframes rotateX-anim {
+    from{transform: rotateX(0deg);}
+    50%{transform: rotateX(180deg);}
+    75%{transform: rotateX(270deg);}
+    to{transform: rotateX(360deg);}
+}
+
+.cel3:hover .rotate-text,
+.cel6:hover .rotate-text,
+.cel10:hover .rotate-text {
+    animation: rotateX-anim 0.7s linear 0.2s;
+}
+
+.rotate-text {
+    margin: 0%;
+}
+
+/* Text Start */
+.md-lime-text {
+    font-size: 4em;
+    text-align: left;
+    color: #e2f02c;
+}
+
+.sm-lime-text {
+    font-size: 2em;
+    text-align: left;
+    color: #e2f02c;
+}
+
+.md-pink-text {
+    font-size: 4em;
+    text-align: left;
+    color: #f230ae;
+}
+
+.sm-pink-text {
+    font-size: 2em;
+    text-align: left;
+    color: #f230ae;
+}
+
+.bg-lpink-text {
+    font-size: 7em;
+    color: #f06df2;
+    text-align: center;
+}
+
+.text-bottom {
+    position: relative;
+    top: 53%;
+}
+/* Text End */
+
+/* Media Start*/
+@media screen and (max-width: 800px) {
+    .text-bottom {
+        top: 37%;
+    }
+}
+/* Media End*/
