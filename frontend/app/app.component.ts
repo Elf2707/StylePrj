@@ -10,6 +10,7 @@ import {PostsListComponent} from "./posts/posts-list/posts-list.component";
 import {AdminPostsComponent} from "./admin-panel/admin-posts/admin-posts.component";
 import {PostService} from "./posts/shared/post.service";
 import {EditPostFormComponent} from "./posts/edit-post-form/edit-post-form.component";
+import {RegistrationComponent} from "./users/registration/registration.component";
 
 
 @Component({
@@ -28,7 +29,8 @@ import {EditPostFormComponent} from "./posts/edit-post-form/edit-post-form.compo
     {path: '/contacts', name: 'Contacts', component: ContactsComponent},
     {path: '/posts/add', name: 'AddPostForm', component: AddPostFormComponent},
     {path: '/posts/edit/:id', name: 'EditPostForm', component: EditPostFormComponent},
-    {path: '/admin/posts', name: 'AdminPosts', component: AdminPostsComponent}
+    {path: '/admin/posts', name: 'AdminPosts', component: AdminPostsComponent},
+    {path: '/users/register', name: 'UserRegister', component: RegistrationComponent}
 ])
 export class AppComponent {
 }
