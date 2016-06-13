@@ -26,8 +26,37 @@ var usersController = (User)=> {
         }
     };
 
+    var getUserByOptions = (req, res)=> {
+        var callBack = (err, user)=> {
+            if (err) {
+                console.log(err);
+                res.status(500).send(err);
+            } else {
+                res.status(200).json(user);
+            }
+        };
+
+        //Test was limit params in query
+        var email = req.query.email;
+        var displayName = req.query.username;
+
+        var options = {};
+
+        if(email){
+            options.email = email;
+        }
+        if(displayName){
+            options.displayName = displayName;
+        }
+
+        User.find(options)
+            .limit(1) //if no options return first one
+            .exec(callBack);
+    };
+
     return {
-        getAllUsers: getAllUsers
+        getAllUsers: getAllUsers,
+        getUserByOptions: getUserByOptions
     }
 }
 

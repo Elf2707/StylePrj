@@ -9,5 +9,6 @@ var router = express.Router();
 var usersController = require('../controllers/usersController')(User);
 
 router.route('/').get(usersController.getAllUsers);
+router.route('/user').get(usersController.getUserByOptions);
 
 module.exports = router;

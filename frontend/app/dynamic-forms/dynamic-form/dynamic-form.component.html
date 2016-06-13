@@ -1,0 +1,11 @@
+<div>
+    <form (ngSubmit)="onSubmit()" [ngFormModel]="form">
+        <div *ngFor="let element of elements" class="form-row">
+            <df-element [element]="element" [form]="form" ></df-element>
+        </div>
+        <div *ngIf="payLoad" class="form-row">
+            <strong>Saved the following values</strong><br>{{payLoad}}
+        </div>
+        <button action="submit" class="btn btn-default">Register</button>
+    </form>
+</div>

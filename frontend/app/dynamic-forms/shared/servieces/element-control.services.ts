@@ -3,7 +3,8 @@
  */
 import {Injectable} from '@angular/core';
 import {ControlGroup, FormBuilder, Validators} from '@angular/common';
-import {ElementBase} from '../base-elements/element-base';
+import {ElementBase} from '../../base-elements/element-base';
+import UserExistenceValidator from "../../../users/shared/user.validator";
 
 @Injectable()
 export class ElementControlService {
@@ -13,8 +14,25 @@ export class ElementControlService {
         let group = {};
 
         elements.map(element => {
-            group[element.key] = element.required?[element.value || '', Validators.required]:
-                [element.value || ''];
+            let validators = [];
+
+            if(element.required){
+                validators.push(Validators.required);
+            }
+            if(element.patternMatch){
+                validators.push(Validators.pattern(element.patternMatch))
+            }
+
+            group[element.key] = validators.length?[element.value || '']:[element.value || '',
+                        Validators.compose(validators)];
+
+            if(element.key === 'email'){
+                group[element.key].push(UserExistenceValidator.checkEmail);
+            }
+
+            if(element.key === 'dispalyName') {
+                group[element.key].push(UserExistenceValidator.checkUsername);
+            }
         });
 
         return this.fb.group(group);
