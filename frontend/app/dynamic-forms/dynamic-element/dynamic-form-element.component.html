@@ -2,11 +2,11 @@
     <label [attr.for]="element.key">{{element.label}}</label>
 
     <div [ngSwitch]="element.controlType">
-        <input *ngSwitchWhen="'textbox'" [ngControl]="element.key" placeholder="element.placeholder"
+        <input *ngSwitchWhen="'textbox'" [ngControl]="element.key" [placeholder]="element.placeholder"
                [id]="element.key" [type]="element.type" class="form-control box-shadow"
                [ngClass]="{ 'has-error' : !isValid && submitAttempt}">
 
-        <input *ngSwitchWhen="'password'" [ngControl]="element.key" placeholder="element.placeholder"
+        <input *ngSwitchWhen="'password'" [ngControl]="element.key" [placeholder]="element.placeholder"
                [id]="element.key" [type]="element.type" [ngClass]="{ 'has-error' : !isValid && submitAttempt}">
 
         <select [id]="element.key" *ngSwitchWhen="'dropdown'" [ngControl]="element.key">
@@ -14,7 +14,13 @@
         </select>
     </div>
 
-    <div *ngIf="!isValid" class="alert alert-danger">
-        {{element.label}} is required
+    <p *ngIf="isPending">Check out data. Please waite...</p>
+    <!-- Errors block-->
+    <div *ngIf="isDirty && !isValid && !isPending" class="alert alert-danger">
+        <div *ngIf="getErrors?.required">{{element.label}} is required</div>
+        <div *ngIf="getErrors?.minlength">{{element.label}} can't be less then 3 letters</div>
+        <div *ngIf="getErrors?.maxlength">{{element.label}} can't be more then 20 letters</div>
+        <div *ngIf="getErrors?.usernameTaken">User with name {{element.value}} already exists, try another one</div>
+        <div *ngIf="getErrors?.emailTaken">User with email {{element.label}} already exists, try another one</div>
     </div>
 </div>

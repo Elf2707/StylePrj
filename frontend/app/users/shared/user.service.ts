@@ -17,14 +17,14 @@ export default class UserService {
     }
 
     getUserByEmail(email:string):Observable<User> {
-        return this.http.get(this.userApiBaseUrl + '?email=' + email)
+        return this.http.get(this.userApiBaseUrl + '/user?email=' + email)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
-    checkUserExistance(control: Control, options:any){
-        return this.http.get(this.userApiBaseUrl + '?' + options.email?`email=${options.email}&`:'' +
-                                    options.username?`username=${options.username}`:'')
+    checkUserExistance(options:any) {
+        return this.http.get(this.userApiBaseUrl + '/user?' + (options.email ? `email=${options.email}&` : '') +
+                (options.displayName ? `displayName=${options.displayName}` : ''))
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -67,14 +67,14 @@ export default class UserService {
     //        .catch(this.handleError);
     //}
     //
-    private extractData(res:Response){
+    private extractData(res:Response) {
         let body = res.json();
         return body || {};
     }
 
-    private handleError(error:any){
-        let errMsg = (error.message)?error.message:
-            error.status?`${error.status} - ${error.statusText}`: 'Server Error';
+    private handleError(error:any) {
+        let errMsg = (error.message) ? error.message :
+            error.status ? `${error.status} - ${error.statusText}` : 'Server Error';
         console.error(errMsg);
         return Observable.throw(errMsg);
     }

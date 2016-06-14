@@ -19,20 +19,18 @@ export class DynamicFormElementComponent {
     }
 
     get isValid() {
-        switch(this.element.key){
-            case 'email':
-                console.log('ssssssssssssssssssssssssssssssssssssssssssssssss ' + this.element.key );
-                console.log(this.form.controls[this.element.key].value);
-                break;
+        return this.form.controls[this.element.key].valid;
+    }
 
-            case 'password':
-                console.log(this.form.controls[this.element.key].value);
-                break;
+    get isPending(){
+        return this.form.controls[this.element.key].pending;
+    }
 
-            case 'displayName':
-                console.log(this.form.controls[this.element.key].value);
-                break;
-        }
-        return this.form.controls[this.element.key].valid
+    get isDirty() {
+        return this.form.controls[this.element.key].dirty;
+    }
+
+    get getErrors(){
+        return this.form.controls[this.element.key].errors;
     }
 }

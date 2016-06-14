@@ -10,8 +10,10 @@ export class ElementBase<T> {
     patternMatch:string;
     minLength:number;
     maxLength:number;
+    customValidByType: boolean;
     order:number;
     controlType:string;
+    placeholder:string;
 
     constructor(options:{
         value?:T,
@@ -22,8 +24,10 @@ export class ElementBase<T> {
         patternMatch?:string,
         minLength?:number,
         maxLength?:number,
+        customValidByType?:boolean,
         order?:number,
-        controlType?:string
+        controlType?:string,
+        placeholder?:string
     } = {}){
         this.value = options.value;
         this.value2 = options.value2;
@@ -31,9 +35,11 @@ export class ElementBase<T> {
         this.label = options.label || '';
         this.required = !!options.required;
         this.patternMatch = options.patternMatch || '';
+        this.minLength = options.minLength;
         this.maxLength = options.maxLength;
-        this.maxLength = options.maxLength;
+        this.customValidByType = !!options.customValidByType;
         this.order = options.order === undefined ? 1: options.order;
         this.controlType = options.controlType || '';
+        this.placeholder = options.placeholder
     }
 }

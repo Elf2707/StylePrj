@@ -16,6 +16,9 @@ export class FormsElementsService {
                 label: 'Name',
                 type: 'text',
                 required: true,
+                minLength: 3,
+                maxLength: 20,
+                customValidByType: true,
                 placeholder: 'Enter name to display',
                 order: 1
             }),
@@ -24,6 +27,7 @@ export class FormsElementsService {
                 label: 'Email',
                 type: 'email',
                 required: true,
+                customValidByType: true,
                 placeholder: 'Enter email',
                 order: 2
             }),
@@ -32,6 +36,7 @@ export class FormsElementsService {
                 label: 'Password',
                 type: 'password',
                 required: true,
+                minLength: 4,
                 placeholder: 'Enter password',
                 order: 3
             }),
@@ -40,6 +45,7 @@ export class FormsElementsService {
                 label: 'Confirm password',
                 type: 'password',
                 required: true,
+                minLength: 4,
                 placeholder: 'Confirm password',
                 order: 4
             })

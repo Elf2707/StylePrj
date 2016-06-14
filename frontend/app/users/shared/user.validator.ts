@@ -5,6 +5,7 @@ import {Control} from '@angular/common';
 import {Injector} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 import {ReflectiveInjector} from '@angular/core';
+import {Http, HTTP_PROVIDERS} from '@angular/http';
 
 import UserService from './user.service';
 
@@ -13,27 +14,28 @@ interface  IUsernameEmailValidator {
 }
 
 function checkUser(control:Control, field:string):Observable<IUsernameEmailValidator> {
-    let injector = ReflectiveInjector.resolveAndCreate([UserService]);
+    let injector = ReflectiveInjector.resolveAndCreate([UserService, Http, HTTP_PROVIDERS]);
     let userService = injector.get(UserService);
 
     return new Observable((obs:any) => {
         control.valueChanges
-            .debounceTime(400)
-            .flatMap(value => userService.checkUserExistance(value))
+            .debounceTime(500)
+            .flatMap(value => {
+                return userService.checkUserExistance({[field]: value});
+            })
             .subscribe(
                 data => {
                     obs.next(null);
-                    obs.complite();
+                    obs.complete();
                 },
 
                 error => {
-                    let message = error.json().message;
                     let reason;
-                    if (message === 'Username already exists') {
+                    if (field === 'displayName') {
                         reason = 'usernameTaken';
                     }
 
-                    if (message === 'User with this email already exists') {
+                    if (field === 'email') {
                         reason = 'emailTaken'
                     }
 

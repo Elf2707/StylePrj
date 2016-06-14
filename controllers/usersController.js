@@ -31,6 +31,11 @@ var usersController = (User)=> {
             if (err) {
                 console.log(err);
                 res.status(500).send(err);
+            } else if (user.length === 0) {
+                res.status(404).json({
+                    message: 'User not found!',
+                    success: false
+                });
             } else {
                 res.status(200).json(user);
             }
@@ -38,14 +43,14 @@ var usersController = (User)=> {
 
         //Test was limit params in query
         var email = req.query.email;
-        var displayName = req.query.username;
+        var displayName = req.query.displayName;
 
         var options = {};
 
-        if(email){
+        if (email) {
             options.email = email;
         }
-        if(displayName){
+        if (displayName) {
             options.displayName = displayName;
         }
 
