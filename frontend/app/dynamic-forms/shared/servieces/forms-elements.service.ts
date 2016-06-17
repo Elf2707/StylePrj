@@ -3,9 +3,9 @@
  */
 import {Injectable} from '@angular/core';
 
-import {ElementBase} from "../../base-elements/element-base";
 import {TextboxElement} from "../../base-elements/textbox-element";
-
+import GroupElementsBase from "../../base-elements/group-elements-base";
+import {ElementBase} from "../../base-elements/element-base";
 
 @Injectable()
 export class FormsElementsService {
@@ -31,24 +31,31 @@ export class FormsElementsService {
                 placeholder: 'Enter email',
                 order: 2
             }),
-            new TextboxElement({
-                key: 'password',
-                label: 'Password',
-                type: 'password',
-                required: true,
-                minLength: 4,
-                placeholder: 'Enter password',
-                order: 3
+            new GroupElementsBase({
+                equalsValid: true,
+                key:'passwdGroup',
+                order:3,
+                elements: [
+                    new TextboxElement({
+                        key: 'password',
+                        label: 'Password',
+                        type: 'password',
+                        required: true,
+                        minLength: 4,
+                        placeholder: 'Enter password',
+                        order: 3
+                    }),
+                    new TextboxElement({
+                        key: 'confirmPassword',
+                        label: 'Confirm password',
+                        type: 'password',
+                        required: true,
+                        minLength: 4,
+                        placeholder: 'Confirm password',
+                        order: 4
+                    })
+                ]
             }),
-            new TextboxElement({
-                key: 'confirmPassword',
-                label: 'Confirm password',
-                type: 'password',
-                required: true,
-                minLength: 4,
-                placeholder: 'Confirm password',
-                order: 4
-            })
         ];
 
         return elements.sort((a,b)=> a.order - b.order);

@@ -3,11 +3,34 @@
 
     <div [ngSwitch]="element.controlType">
         <input *ngSwitchWhen="'textbox'" [ngControl]="element.key" [placeholder]="element.placeholder"
-               [id]="element.key" [type]="element.type" class="form-control box-shadow"
-               [ngClass]="{ 'has-error' : !isValid && submitAttempt}">
+               [id]="element.key" [type]="element.type" class="form-control box-shadow">
 
         <input *ngSwitchWhen="'password'" [ngControl]="element.key" [placeholder]="element.placeholder"
-               [id]="element.key" [type]="element.type" [ngClass]="{ 'has-error' : !isValid && submitAttempt}">
+               [id]="element.key" [type]="element.type">
+
+        <!--Group of controls Starts-->
+        <div *ngSwitchWhen="'groupOfControls'" [ngControlGroup]="element.key">
+
+            <div *ngFor="let controlElem of element.elements" class="form-group">
+                <label [attr.for]="controlElem.key">{{controlElem.label}}</label>
+
+                <div [ngSwitch]="controlElem.controlType">
+                    <input *ngSwitchWhen="'textbox'" [placeholder]="controlElem.placeholder"
+                           [id]="controlElem.key" [type]="controlElem.type" class="form-control box-shadow">
+
+                    <input *ngSwitchWhen="'password'" [placeholder]="controlElem.placeholder"
+                           [id]="controlElem.key" [type]="controlElem.type">
+                </div>
+
+                <div *ngIf="isDirty && !isValid && !isPending" class="alert alert-danger">
+                    <div *ngIf="getErrors?.required">{{element.label}} is required</div>
+                    <div *ngIf="getErrors?.minlength">{{element.label}} can't be less then 3 letters</div>
+                    <div *ngIf="getErrors?.maxlength">{{element.label}} can't be more then 20 letters</div>
+                    <div *ngIf="getErrors?.passwdNotEquals">Password and Confirm password are different</div>
+                </div>
+            </div>
+        </div>
+        <!--Group of controls Ends-->
 
         <select [id]="element.key" *ngSwitchWhen="'dropdown'" [ngControl]="element.key">
             <option *ngFor="let opt of element.options" [value]="opt.key">{{opt.value}}</option>

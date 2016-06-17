@@ -59,9 +59,91 @@ var usersController = (User)=> {
             .exec(callBack);
     };
 
+    var checkUserNameExists = (req, res)=> {
+        var callBack = (err, users)=> {
+            if (err) {
+                //Server error
+                console.log(err);
+                res.status(500).json({
+                    error: err,
+                    message: 'Server error',
+                    couldUseData: false
+                });
+            } else if (users.length === 0) {
+                //Where is no user with such email
+                res.status(200).json({
+                    message: 'User not found could use name!',
+                    couldUseData: true
+                });
+            } else {
+                res.status(409).json({
+                    message: 'User with this data already exists!',
+                    couldUseData: false
+                });
+            }
+        };
+
+        var displayName = req.query.displayName;
+
+        //Name not set so create User with such name not allowed
+        if (!displayName) {
+            res.status(409).json({
+                message: 'User name for check not set',
+                couldUseData: false
+            });
+            return;
+        }
+
+        User.find({displayName: displayName})
+            .limit(1)
+            .exec(callBack);
+    };
+
+    var checkUserEmailExists = (req, res)=> {
+        var callBack = (err, users)=> {
+            if (err) {
+                //Server error
+                console.log(err);
+                res.status(500).json({
+                    error: err,
+                    message: 'Server error',
+                    couldUseData: false
+                });
+            } else if (users.length === 0) {
+                //Where is no user with such email
+                res.status(200).json({
+                    message: 'User email not found could use email!',
+                    couldUseData: true
+                });
+            } else {
+                res.status(409).json({
+                    message: 'User with this data already exists',
+                    couldUseData: false
+                });
+            }
+        };
+
+        var email = req.query.email;
+
+        //Name not set so create User with such email not allowed
+        if (!email) {
+            res.status(409).json({
+                message: 'User email for check not set',
+                couldUseData: false
+            });
+            return;
+        }
+
+        User.find({email: email})
+            .limit(1)
+            .exec(callBack);
+    };
+
     return {
         getAllUsers: getAllUsers,
-        getUserByOptions: getUserByOptions
+        getUserByOptions: getUserByOptions,
+        checkUserEmailExists: checkUserEmailExists,
+        checkUserNameExists: checkUserNameExists
     }
 }
 

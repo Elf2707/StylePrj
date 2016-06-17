@@ -12,6 +12,8 @@ import User from '../model/user.model'
 @Injectable()
 export default class UserService {
     private userApiBaseUrl = '/api/users';
+    private userEmailExistsUrl = '/api/users/checkemail?email=';
+    private userNameExistsUrl = '/api/users/checkname?displayName=';
 
     constructor(private http:Http) {
     }
@@ -23,8 +25,23 @@ export default class UserService {
     }
 
     checkUserExistance(options:any) {
-        return this.http.get(this.userApiBaseUrl + '/user?' + (options.email ? `email=${options.email}&` : '') +
-                (options.displayName ? `displayName=${options.displayName}` : ''))
+        if (options.email) {
+            return this.checkUserEmailExists(options.email)
+        }
+
+        if (options.displayName) {
+            return this.checkUserNameExists(options.displayName)
+        }
+    }
+
+    checkUserEmailExists(email:string) {
+        return this.http.get(this.userEmailExistsUrl + email)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    checkUserNameExists(displayName:string) {
+        return this.http.get(this.userNameExistsUrl + displayName)
             .map(this.extractData)
             .catch(this.handleError);
     }
