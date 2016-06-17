@@ -8,7 +8,8 @@ import {ElementBase} from '../base-elements/element-base';
 
 @Component({
     selector: 'df-element',
-    templateUrl: 'app/dynamic-forms/dynamic-element/dynamic-form-element.component.html'
+    templateUrl: 'app/dynamic-forms/dynamic-element/dynamic-form-element.component.html',
+    directives: [DynamicFormElementComponent]
 })
 
 export class DynamicFormElementComponent {
@@ -30,7 +31,14 @@ export class DynamicFormElementComponent {
         return this.form.controls[this.element.key].dirty;
     }
 
+    //return null if where are no errors
     get getErrors(){
-        return this.form.controls[this.element.key].errors;
+        let errors = this.form.controls[this.element.key].errors
+
+        for(let key in errors) {
+            return errors;
+        }
+
+        return null;
     }
 }

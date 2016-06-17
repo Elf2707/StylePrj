@@ -10,7 +10,7 @@ export class ElementBase<T> {
     patternMatch:string;
     minLength:number;
     maxLength:number;
-    customValidByType: boolean;
+    customValidExistance: boolean;
     order:number;
     controlType:string;
     placeholder:string;
@@ -24,7 +24,7 @@ export class ElementBase<T> {
         patternMatch?:string,
         minLength?:number,
         maxLength?:number,
-        customValidByType?:boolean,
+        customValidExistance?:boolean,
         order?:number,
         controlType?:string,
         placeholder?:string
@@ -37,7 +37,7 @@ export class ElementBase<T> {
         this.patternMatch = options.patternMatch || '';
         this.minLength = options.minLength;
         this.maxLength = options.maxLength;
-        this.customValidByType = !!options.customValidByType;
+        this.customValidExistance = !!options.customValidExistance;
         this.order = options.order === undefined ? 1: options.order;
         this.controlType = options.controlType || '';
         this.placeholder = options.placeholder

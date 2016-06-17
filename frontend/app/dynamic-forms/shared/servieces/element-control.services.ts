@@ -21,17 +21,9 @@ export class ElementControlService {
             if (!element.hasOwnProperty('elements')) {
                 group[element.key] = this.elementToControl(element);
             } else {
-                let gp = this.groupToControl(element);
-
-                group[element.key] = gp;
+                group[element.key] = this.groupToControl(element);
             }
         });
-
-        var result = this.fb.group(group);
-
-        console.log('ssssssssssssssssssssssssssss');
-        console.log(result);
-        console.log('ssssssssssssssssssssssssssss');
 
         return this.fb.group(group);
     }
@@ -58,7 +50,7 @@ export class ElementControlService {
 
         let asyncValidators = [];
         //Add async validation
-        if (element.customValidByType) {
+        if (element.customValidExistance) {
             if (element.key === 'email') {
                 asyncValidators.push(UserExistenceValidator.checkEmail);
             }

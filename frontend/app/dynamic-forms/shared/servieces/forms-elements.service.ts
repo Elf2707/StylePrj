@@ -18,7 +18,7 @@ export class FormsElementsService {
                 required: true,
                 minLength: 3,
                 maxLength: 20,
-                customValidByType: true,
+                customValidExistance: true,
                 placeholder: 'Enter name to display',
                 order: 1
             }),
@@ -27,7 +27,8 @@ export class FormsElementsService {
                 label: 'Email',
                 type: 'email',
                 required: true,
-                customValidByType: true,
+                customValidExistance: true,
+                patternMatch: '^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$',
                 placeholder: 'Enter email',
                 order: 2
             }),
